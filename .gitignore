@@ -1,7 +1,11 @@
 .idea/**
 .DS_STORE
 
+# Configuration file
+config.toml
+
 # Executables and binaries
+go
 debug
 __debug_bin
 main
