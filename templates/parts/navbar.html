@@ -1,0 +1,21 @@
+{% block navbar %}
+<div class="sidebar">
+    <div class="top-row pl-4 navbar navbar-dark">
+        <a class="navbar-brand" href="">bikemon</a>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    
+    <div class="navbar">
+        <ul class="nav flex-column">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <span class="oi oi-location" aria-hidden="true"></span> Bike stations
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% use 'parts/navbar.html' %}
+{% use 'parts/head.html' %}
+{% use 'parts/footer.html' %}
+<!doctype html>
+<html lang="en" dir="ltr">
+{% block head %}{% endblock %}
+
+<body class="">
+	<app>
+		{% block navbar %}{% endblock %}
+		<div class="main">
+			<div class="top-row px-4">
+					
+
+				<a href="/logout" class="ml-md-auto">
+					<span class="oi oi-account-logout" aria-hidden="true"></span>
+				</a>
+			</div>
+
+			<div class="content px-4">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</app>
+	{% block footer %} {% endblock %}
+</body>
+
+</html>
