@@ -9,13 +9,15 @@ import (
 	"path/filepath"
 )
 
+// View is the struct used to contain an individual page template.
 type View struct {
 	Name string
 
 	Variables map[string]stick.Value
-	Context *yarf.Context
+	Context   *yarf.Context
 }
 
+// Creates a new View instance.
 func New(ctx *yarf.Context) *View {
 	view := &View{}
 
@@ -25,6 +27,7 @@ func New(ctx *yarf.Context) *View {
 	return view
 }
 
+// Renders a view instance.
 func (v *View) Render() error {
 
 	// Set up proper pathing for the template.
@@ -40,6 +43,7 @@ func (v *View) Render() error {
 	if err != nil {
 		return err
 	}
+
 	// No error, return nil!
 	return nil
 }

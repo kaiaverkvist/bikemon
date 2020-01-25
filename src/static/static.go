@@ -19,7 +19,7 @@ type File struct {
 	Prefix string
 }
 
-// Implement the GET handler
+// Implement the GET handler for the file system handler.
 func (f *File) Get(c *yarf.Context) error {
 	// Construct path
 	path := f.Path + strings.TrimPrefix(c.Request.URL.EscapedPath(), f.Prefix)
@@ -38,6 +38,7 @@ func (f *File) Get(c *yarf.Context) error {
 	return nil
 }
 
+// Used by Yarf to set up the fileserver.
 func NewFileServer(y *yarf.Yarf, path, prefix string) *yarf.Yarf {
 
 	// Set follow to file server

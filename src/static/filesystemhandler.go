@@ -5,19 +5,19 @@ import (
 	"strings"
 )
 
-// FileSystem custom file system handler
+// FileSystem custom file system handler.
 type CustomFileSystem struct {
 	fs http.FileSystem
 }
 
 func (fs CustomFileSystem) Open(path string) (http.File, error) {
-	f, err := fs.fs.Open(path)
+	file, err := fs.fs.Open(path)
 	if err != nil {
 		return nil, err
 	}
 
-	s, err := f.Stat()
-	if s.IsDir() {
+	stat, err := file.Stat()
+	if stat.IsDir() {
 		index := strings.TrimSuffix(path, "/") + "/index.html"
 		if _, err := fs.fs.Open(index); err != nil {
 			return nil, err

@@ -13,8 +13,9 @@ import (
 
 // Config is the main configuration struct, holding sub-structs for each type of configuration.
 type Config struct {
-	Http       Http
-	ViewConfig ViewConfig
+	AppIdentifier string
+	Http          Http
+	ViewConfig    ViewConfig
 }
 
 type ViewConfig struct {
@@ -87,7 +88,7 @@ func getDefaultConfig() Config {
 	viewConfig := ViewConfig{"/", "templates", "html", "base", true}
 
 	// Place everything into the config struct.
-	config := Config{http, viewConfig}
+	config := Config{"bikemon-github", http, viewConfig}
 
 	return config
 }

@@ -35,6 +35,7 @@ func (ws WebService) StartWebService() {
 	}
 }
 
+// Starts the server in regular HTTP mode.
 func (ws WebService) start(y *yarf.Yarf) {
 	httpPort := fmt.Sprint(":", config.AppConfig.Http.Port)
 
@@ -45,6 +46,7 @@ func (ws WebService) start(y *yarf.Yarf) {
 	y.Start(httpPort)
 }
 
+// Starts the server in TLS (SSL) mode.
 func (ws WebService) startTLS(y *yarf.Yarf) {
 	httpsPort := fmt.Sprint(":", config.AppConfig.Http.SSLPort)
 
@@ -55,6 +57,7 @@ func (ws WebService) startTLS(y *yarf.Yarf) {
 	y.StartTLS(httpsPort, config.AppConfig.Http.CertFile, config.AppConfig.Http.Keyfile)
 }
 
+// This is where routes are defined.
 func (ws WebService) addRoutes(y *yarf.Yarf) {
 
 	// Add the page routes.

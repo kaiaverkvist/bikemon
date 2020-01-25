@@ -17,7 +17,7 @@
 <div class="mb-3">
     <h3>Bike Stations</h3>
 </div>
-<div class="card text-white bg-primary mb-3 p-2">
+<div class="card text-white branding-gradient mb-3 p-2">
     <input id="searchInput" class="form-control mb-1" type="text" placeholder="Search...">
     <small>Filter table to find your appropriate station. You can use any part of the table as a search query.</small>
 </div>
@@ -33,13 +33,13 @@
             </tr>
         </thead>
         <tbody id="stationTable">
-            {% for entry in stationData.Data.Stations %}
+            {% for entry in stations.Data.Stations %}
             <tr>
                 <th>#{{ entry.StationID }}</th>
                 <th>{{ entry.Name }}</th>
                 <th><i>{{ entry.Address }}</i></th>
                 <th><code>{{ entry.Lat}}, {{ entry.Lon }}</code></th>
-                <th>x of {{ entry.Capacity }}</th>
+                <th>{{ entry.NumBikesAvailable }} of {{ entry.NumDocksAvailable }}</th>
             </tr>
             {% endfor %}
         </tbody>
