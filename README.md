@@ -7,8 +7,9 @@ To run the web app, use the following command:
 ```
 go run main.go
 ```
-This should create the configuration file, then and start the server.
-If any errors are found, those will also be displayed. 
+This should create the configuration file, and start the server.
+If any errors are found, those will also be displayed.
+Note: The SSL warning is expected in development environments.
 
 ## Technical improvements / concerns
 This is a list of things I view as either necessary in a production
