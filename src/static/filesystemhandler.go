@@ -24,5 +24,6 @@ func (fs CustomFileSystem) Open(path string) (http.File, error) {
 		}
 	}
 
-	return f, nil
+	// Returns the file, no error
+	return file, nil
 }
