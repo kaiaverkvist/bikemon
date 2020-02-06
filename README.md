@@ -11,6 +11,14 @@ This should create the configuration file, and start the server.
 If any errors are found, those will also be displayed.
 Note: The SSL warning is expected in development environments.
 
+### Tests
+
+Use:
+```
+go test -v ./...
+```
+This runs the tests in a verbose mode, printing out results.
+
 ## Technical improvements / concerns
 This is a list of things I view as either necessary in a production
 scenario, or rather big improvements to the UX.
