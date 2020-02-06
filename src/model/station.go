@@ -37,7 +37,7 @@ type CompositeResponseData struct {
 	}
 }
 
-// UnmarshalIntoComposite takes a raw JSON and converts it into the StationResponse model.
+// UnmarshalIntoCompositeStationData takes a raw JSON and converts it into the StationResponse model.
 func UnmarshalIntoCompositeStationData(rawStationInformation string, rawStationStatus string) (error, *CompositeResponseData) {
 	var response CompositeResponseData
 

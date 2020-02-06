@@ -11,6 +11,18 @@ This should create the configuration file, and start the server.
 If any errors are found, those will also be displayed.
 Note: The SSL warning is expected in development environments.
 
+### Setting up SSL
+In order to use SSL, enable and configure the relevant settings in config.toml
+
+*Note: valid certificate files required.*
+
+```
+UseSSL = true
+SSLPort = 443
+CertFile = "tls/server.crt"
+Keyfile = "tls/server.key"
+```
+
 ### Tests
 
 Use:
