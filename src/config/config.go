@@ -1,4 +1,3 @@
-// TODO: Comment the various structs and functions in config.go
 package config
 
 import (
@@ -13,11 +12,15 @@ import (
 
 // Config is the main configuration struct, holding sub-structs for each type of configuration.
 type Config struct {
+	StationsInformationUrl string
+	StationsStatusUrl string
+
 	AppIdentifier string
 	Http          Http
 	ViewConfig    ViewConfig
 }
 
+// ViewConfig represents the configuration used to render views.
 type ViewConfig struct {
 	BaseURI   string
 	Folder    string
@@ -26,6 +29,7 @@ type ViewConfig struct {
 	Caching   bool
 }
 
+// Http represents settings and variables related to the http server.
 type Http struct {
 	Port int
 
@@ -57,7 +61,7 @@ func LoadConfig() Config {
 			encoder.Indent = ""
 
 			// Run the encoding with default config.
-			err = encoder.Encode(getDefaultConfig())
+			err = encoder.Encode(GetDefaultConfig())
 
 			// Write to filesystem.
 			err = ioutil.WriteFile(configLocation, buffer.Bytes(), 777)
@@ -77,8 +81,8 @@ func LoadConfig() Config {
 	return conf
 }
 
-// getDefaultConfig populates the default configuration struct.
-func getDefaultConfig() Config {
+// GetDefaultConfig populates the default configuration struct.
+func GetDefaultConfig() Config {
 
 	// Default http settings.
 	http := Http{8080, true, false, 443, "tls/server.crt", "tls/server.key"}
@@ -88,7 +92,8 @@ func getDefaultConfig() Config {
 	viewConfig := ViewConfig{"/", "templates", "html", "base", true}
 
 	// Place everything into the config struct.
-	config := Config{"bikemon-github", http, viewConfig}
+	config := Config{"https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json", "https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json",
+		"bikemon-github", http, viewConfig}
 
 	return config
 }
