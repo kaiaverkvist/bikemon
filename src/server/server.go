@@ -63,6 +63,17 @@ func (ws WebService) addRoutes(y *yarf.Yarf) {
 	// Add the page routes.
 	y.Add("/", new(resource.IndexResource))
 
+	// Create a new subgroup for our REST API routes.
+	ag := yarf.RouteGroup("/api")
+
+	// Adds the API endpoints.
+	// Adds two endpoints to the same handler so we can treat the :id one as optional.
+	ag.Add("/stations", new(resource.BikeshareResource))
+	ag.Add("/stations/:id", new(resource.BikeshareResource))
+
+	// Adds the group to the router.
+	y.AddGroup(ag)
+
 	// Add a static file server which will serve files over /public.
 	static.NewFileServer(y, "public", "/public")
 }

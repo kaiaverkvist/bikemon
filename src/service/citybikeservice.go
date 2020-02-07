@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"github.com/kaiaverkvist/bikemon/src/config"
 	"github.com/kaiaverkvist/bikemon/src/model"
 	"io/ioutil"
@@ -10,7 +11,7 @@ import (
 // This holds our CityBikeService that we use to perform operations with.
 type CityBikeService struct {
 	stationsInformationRestUrl string
-	stationsStatusRestUrl string
+	stationsStatusRestUrl      string
 }
 
 // New creates a new instance of the CityBikeService.
@@ -65,4 +66,39 @@ func (cbs *CityBikeService) GetCityBikeData() (error, *model.CompositeResponseDa
 	// This should only be hit if we have no errors.
 	// Returns *model.CompositeResponseData.
 	return nil, compositeData
+}
+
+func (cbs *CityBikeService) GetDataById(id string) (error, *model.CompositeResponseData) {
+
+	// Get the base city bike data and catch any errors from the http calls.
+	err, data := cbs.GetCityBikeData()
+	if err != nil {
+		return err, nil
+	}
+
+	// We create a new blank struct of the same type and return this instead of modifying the
+	// pointer we get from cbs.GetCityBikeData.
+	newData := model.CompositeResponseData{
+		LastUpdated: data.LastUpdated,
+		TTL:         data.TTL,
+		Data: struct {
+    		Stations []model.Station
+		}{},
+	}
+
+	// Loop over the stations and add the one with the right ID to the new struct.
+	for _, station := range data.Data.Stations {
+
+		// If the station ID matches the ID string, we can remove
+		if station.StationID == id {
+			newData.Data.Stations = append(newData.Data.Stations, station)
+		}
+	}
+
+	// Return an error if we don't find a matching station.
+	if len(newData.Data.Stations) == 0 {
+		return errors.New("unable to retrieve any matching stations"), nil
+	}
+
+	return nil, &newData
 }

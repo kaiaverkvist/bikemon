@@ -36,7 +36,7 @@ func (resource *IndexResource) Get(c *yarf.Context) error {
 
 		// Display a simple error message, while leaving out the details since it gets logged anyways.
 		c.Render("There was an error displaying the page. Please try again.")
-		return err
+		return nil
 	}
 
 	return nil
