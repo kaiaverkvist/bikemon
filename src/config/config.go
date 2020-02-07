@@ -13,7 +13,7 @@ import (
 // Config is the main configuration struct, holding sub-structs for each type of configuration.
 type Config struct {
 	StationsInformationUrl string
-	StationsStatusUrl string
+	StationsStatusUrl      string
 
 	AppIdentifier string
 	Http          Http

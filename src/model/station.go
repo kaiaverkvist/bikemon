@@ -18,23 +18,26 @@ type CompositeResponseData struct {
 	LastUpdated int `json:"last_updated"`
 	TTL         int `json:"ttl"`
 	Data        struct {
-		Stations []struct {
-			StationID         string `json:"station_id"`
-
-			Name      string  `json:"name"`
-			Address   string  `json:"address"`
-			Lat       float64 `json:"lat"`
-			Lon       float64 `json:"lon"`
-			Capacity  int     `json:"capacity"`
-
-			IsInstalled       int    `json:"is_installed"`
-			IsRenting         int    `json:"is_renting"`
-			IsReturning       int    `json:"is_returning"`
-			LastReported      int    `json:"last_reported"`
-			NumBikesAvailable int    `json:"num_bikes_available"`
-			NumDocksAvailable int    `json:"num_docks_available"`
-		}
+		Stations []Station
 	}
+}
+
+// Sub struct used for individual bike share stations.
+type Station struct {
+	StationID string `json:"station_id"`
+
+	Name     string  `json:"name"`
+	Address  string  `json:"address"`
+	Lat      float64 `json:"lat"`
+	Lon      float64 `json:"lon"`
+	Capacity int     `json:"capacity"`
+
+	IsInstalled       int `json:"is_installed"`
+	IsRenting         int `json:"is_renting"`
+	IsReturning       int `json:"is_returning"`
+	LastReported      int `json:"last_reported"`
+	NumBikesAvailable int `json:"num_bikes_available"`
+	NumDocksAvailable int `json:"num_docks_available"`
 }
 
 // UnmarshalIntoCompositeStationData takes a raw JSON and converts it into the StationResponse model.
@@ -67,7 +70,7 @@ func (cr *CompositeResponseData) CreateCompositeStruct(status RequestResponse, s
 		for _, ssStation := range status.Data.Stations {
 			if ssStation.StationID == srStation.StationID {
 
-				var compositeStation CompositeStation
+				var compositeStation Station
 
 				// Results from srStation (StationResponse)
 				compositeStation.StationID = srStation.StationID
@@ -96,18 +99,18 @@ func (cr *CompositeResponseData) CreateCompositeStruct(status RequestResponse, s
 
 // CompositeStation is the shared struct between the two response types, populated as we go.
 type CompositeStation struct {
-	StationID         string `json:"station_id"`
+	StationID string `json:"station_id"`
 
-	Name      string  `json:"name"`
-	Address   string  `json:"address"`
-	Lat       float64 `json:"lat"`
-	Lon       float64 `json:"lon"`
-	Capacity  int     `json:"capacity"`
+	Name     string  `json:"name"`
+	Address  string  `json:"address"`
+	Lat      float64 `json:"lat"`
+	Lon      float64 `json:"lon"`
+	Capacity int     `json:"capacity"`
 
-	IsInstalled       int    `json:"is_installed"`
-	IsRenting         int    `json:"is_renting"`
-	IsReturning       int    `json:"is_returning"`
-	LastReported      int    `json:"last_reported"`
-	NumBikesAvailable int    `json:"num_bikes_available"`
-	NumDocksAvailable int    `json:"num_docks_available"`
+	IsInstalled       int `json:"is_installed"`
+	IsRenting         int `json:"is_renting"`
+	IsReturning       int `json:"is_returning"`
+	LastReported      int `json:"last_reported"`
+	NumBikesAvailable int `json:"num_bikes_available"`
+	NumDocksAvailable int `json:"num_docks_available"`
 }
