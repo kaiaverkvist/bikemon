@@ -29,7 +29,7 @@ Use:
 ```
 go test -v ./...
 ```
-This runs the tests in a verbose mode, printing out results.
+This runs the tests in verbose mode, printing out results.
 
 ## Technical improvements / concerns
 This is a list of things I view as either necessary in a production

@@ -30,26 +30,26 @@ func New(stationsInformationUrl string, stationsStatusUrl string) *CityBikeServi
 func (cbs *CityBikeService) GetCityBikeData() (error, *model.CompositeResponseData) {
 
 	// Requests information from the stationInformation service.
-	req, err := http.Get(cbs.stationsInformationRestUrl)
+	response, err := http.Get(cbs.stationsInformationRestUrl)
 
 	// Set the identifier header as requested by the API creators.
 	// https://oslobysykkel.no/apne-data/sanntid
-	req.Header.Set("Client-Identifier", config.AppConfig.AppIdentifier)
+	response.Header.Set("Client-Identifier", config.AppConfig.AppIdentifier)
 
 	// This reads the request into a string we can use later.
-	defer req.Body.Close()
-	respBody, err := ioutil.ReadAll(req.Body)
+	defer response.Body.Close()
+	respBody, err := ioutil.ReadAll(response.Body)
 	rawStationInformation := string(respBody)
 
-	req, err = http.Get(cbs.stationsStatusRestUrl)
+	response, err = http.Get(cbs.stationsStatusRestUrl)
 
 	// Set the identifier header as requested by the API creators.
 	// https://oslobysykkel.no/apne-data/sanntid
-	req.Header.Set("Client-Identifier", config.AppConfig.AppIdentifier)
+	response.Header.Set("Client-Identifier", config.AppConfig.AppIdentifier)
 
 	// Reads into a string we will use later.
-	defer req.Body.Close()
-	respBody, err = ioutil.ReadAll(req.Body)
+	defer response.Body.Close()
+	respBody, err = ioutil.ReadAll(response.Body)
 	rawStationStatus := string(respBody)
 
 	// We can now create a compositeData model and unmarshal our data into it.
