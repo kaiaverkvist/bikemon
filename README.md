@@ -11,6 +11,12 @@ This should create the configuration file, and start the server.
 If any errors are found, those will also be displayed.
 Note: The SSL warning is expected in development environments.
 
+### REST API Endpoints
+
+Currently, valid endpoints are:
+* `/api/stations/` - returns all stations with associated data.
+* `/api/stations/{id}` - returns a specific station.
+
 ### Setting up SSL
 In order to use SSL, enable and configure the relevant settings in config.toml
 
